@@ -77,6 +77,22 @@ const makeRewardHistoryListJson = (overrides: Record<string, any> = {}) => ({
     ...overrides
 });
 
+describe("PillarInfo type constants", () => {
+    it("match the pillar types go-zenon stores", () => {
+        expect(PillarInfo.unknownType).to.equal(0);
+        expect(PillarInfo.legacyPillarType).to.equal(1);
+        expect(PillarInfo.regularPillarType).to.equal(2);
+    });
+
+    it("tell legacy and regular pillars apart", () => {
+        const legacy = PillarInfo.fromJson(makePillarInfoJson({ type: 1 }));
+        const regular = PillarInfo.fromJson(makePillarInfoJson({ type: 2 }));
+        expect(legacy.type).to.equal(PillarInfo.legacyPillarType);
+        expect(regular.type).to.equal(PillarInfo.regularPillarType);
+        expect(regular.type).to.not.equal(PillarInfo.legacyPillarType);
+    });
+});
+
 describe("PillarApi", () => {
     let pillarApi: PillarApi;
     let mockClient: MockClient;

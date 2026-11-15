@@ -2,9 +2,11 @@ import { Address } from "../primitives/index.js";
 import { Model } from "../base.js";
 
 export class PillarInfo extends Model {
+    // Pillar types as stored by go-zenon (vm/embedded/definition/pillars.go:
+    // AnyPillarType = 0, LegacyPillarType = 1, NormalPillarType = 2).
     static unknownType: number = 0;
     static legacyPillarType: number = 1;
-    static regularPillarType: number = 1;
+    static regularPillarType: number = 2;
 
     constructor(
         public name: string,
